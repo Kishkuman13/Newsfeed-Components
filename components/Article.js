@@ -86,6 +86,13 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: `I added this as a new title`,
+    date: `Today is not that day!`,
+    firstParagraph: `I don't want to write a paragraph.`,
+    secondParagraph: `I don't want to write a second paragraph.`,
+    thirdParagraph:`I don't want to write a third paragraph.`
   }
 ];
 
@@ -114,3 +121,46 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
+const articleFeed = document.querySelector('.articles');
+
+function articleMaker(props){
+  const newArticle = document.createElement('div');
+  const newTitle = document.createElement('h2');
+  const newDate = document.createElement('p');
+  const newPara1 = document.createElement('p');
+  const newPara2 = document.createElement('p');
+  const newPara3 = document.createElement('p');
+  const newSpan = document.createElement('span');
+
+  newArticle.appendChild(newTitle);
+  newArticle.appendChild(newDate);
+  newArticle.appendChild(newPara1);
+  newArticle.appendChild(newPara2);
+  newArticle.appendChild(newPara3);
+  newArticle.appendChild(newSpan);
+
+  newArticle.classList.add('article');
+  newDate.classList.add('date');
+  newSpan.classList.add('expandButton');
+
+  newTitle.textContent = props.title;
+  newDate.textContent = props.date;
+  newPara1.textContent = props.firstParagraph;
+  newPara2.textContent = props.secondParagraph;
+  newPara3.textContent = props.thirdParagraph;
+  newSpan.textContent = '+';
+
+  function toggleClass (event) {
+    newArticle.classList.toggle('article-open');
+  }
+
+  newSpan.addEventListener('click', toggleClass);
+
+  return newArticle;
+
+}
+
+data.forEach((artdata) => {
+  articleFeed.appendChild(articleMaker(artdata));  
+})
